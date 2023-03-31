@@ -1,0 +1,15 @@
+Primeiro projeto utilizando Flask
+A referencia de estrutura vem da documentação do Flask
+https://flask.palletsprojects.com/en/2.2.x/tutorial/layout/
+
+A estrutura das pastas funciona da seguinte forma:
+
+    flaskr -> Pacote Python que contem os códigos e arquivos da aplicação
+
+    tests -> Diretorio que contém módulos de teste
+
+    venv -> Virtual Environment que contém a instalação de dependencias do projeto
+
+    setup.py -> Arquivo que vai dizer ao Python como instalar o projeto
+
+    configuração de versionamento -> para Git

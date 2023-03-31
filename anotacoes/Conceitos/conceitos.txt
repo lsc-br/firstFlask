@@ -1,0 +1,9 @@
+The Application Factory¶
+    "The __init__.py serves double duty: it will contain the application factory, and it tells Python that the flaskr
+    directory should be treated as a package."
+
+        ~> ,Ou seja, __init__.py é a Fabrica da Aplicação (Onde a função create_app() deve estar)
+
+    create_app() is the application factory function. You’ll add to it later in the tutorial, but it already does a lot.
+
+        ~> Reforça que o create_app() é a função da Application Factory

@@ -1,0 +1,4 @@
+flask --app flaskr run --debug
+
+    ~> Perceba que nesse tutorial, ao invés que mandar o flask rodar um main.py, ou similar, manda rodar o pacote python
+    do projeto
