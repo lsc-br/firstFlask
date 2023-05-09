@@ -42,6 +42,10 @@ def create_app(test_config=None):
     app.register_blueprint(auth.bp)
 
     # //--\\ Blueprints and Views¶ -> Import and register the blueprint from[,,,]
-    # \\--// Adicionados 4
+    # \\--// Blog Blueprint¶
+
+    from . import blog
+    app.register_blueprint(blog.bp)
+    app.add_url_rule('/', endpoint='index')
 
     return app

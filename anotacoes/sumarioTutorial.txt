@@ -1,4 +1,4 @@
-Source: https://flask.palletsprojects.com/en/2.2.x/tutorial/layout/
+Source: https://flask.palletsprojects.com/en/2.3.x/tutorial/layout/
 
 0 Project Layout¶
 
@@ -100,5 +100,69 @@ Source: https://flask.palletsprojects.com/en/2.2.x/tutorial/layout/
     {% and %} denotes a control flow statement like if and for. Unlike Python, blocks are denoted by start and end tags
     rather than indentation since static text within a block could change indentation.
 
+
         4.1 base.html   [flaskr/templates/]
             -> The Base Layout¶
+
+
+        4.2 register.html [flaskr/templates/auth/]
+            -> Register¶
+
+                {% extends 'base.html' %} tells Jinja that this template should replace the blocks from the base
+                template. All the rendered content must appear inside {% block %} tags that override blocks from the
+                base template.
+                A useful pattern used here is to place {% block title %} inside {% block header %}. This will set the
+                title block and then output the value of it into the header block, so that both the window and page
+                share the same title without writing it twice
+                The input tags are using the required attribute here. This tells the browser not to submit the form
+                until those fields are filled in. If the user is using an older browser that doesn’t support that
+                attribute, or if they are using something besides a browser to make requests, you still want to
+                validate the data in the Flask view. It’s important to always fully validate the data on the server,
+                even if the client does some validation as well.
+
+
+        4.3 login.html [flaskr/templates/auth]
+            -> Log In¶
+
+
+5 Static Files¶
+
+    5.1 flaskr/static
+        Besides CSS, other types of static files might be files with JavaScript functions, or a logo image.
+        They are all placed under the flaskr/static directory and referenced with url_for('static', filename='...').
+
+    5.2 style.css [flaskr/static/style.css]
+
+
+6 Blog Blueprint¶
+    You’ll use the same techniques you learned about when writing the authentication blueprint to write the blog
+    blueprint. The blog should list all posts, allow logged in users to create posts, and allow the author of a post
+    to edit or delete it.
+
+    Dica: As you implement each view, keep the development server running. As you save your changes,
+    try going to the URL in your browser and testing them out.
+
+    6.1 The Blueprint¶
+        Unlike the auth blueprint, the blog blueprint does not have a url_prefix. So the index view will be at /,
+        the create view at /create, and so on. The blog is the main feature of Flaskr, so it makes sense that the blog
+        index will be the main index.
+
+        However, the endpoint for the index view defined below will be blog.index. Some of the authentication views
+        referred to a plain index endpoint. app.add_url_rule() associates the endpoint name 'index' with the / url so
+        that url_for('index') or url_for('blog.index') will both work, generating the same / URL either way.
+
+        In another application you might give the blog blueprint a url_prefix and define a separate index view in the
+        application factory, similar to the hello view. Then the index and blog.index endpoints and URLs would be
+        different.
+
+    6.2 Index¶
+
+        The index will show all of the posts, most recent first. A JOIN is used so that the author information from the
+        user table is available in the result.
+
+
+    6.3 Update¶
+
+        abort() will raise a special exception that returns an HTTP status code. It takes an optional message to show
+        with the error, otherwise a default message is used. 404 means “Not Found”, and 403 means “Forbidden”.
+        (401 means “Unauthorized”, but you redirect to the login page instead of returning that status.)

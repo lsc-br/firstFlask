@@ -7,7 +7,7 @@ from flask import (
 
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from flask.db import get_db
+from flaskr.db import get_db
 
 bp = Blueprint('auth', __name__, url_prefix='/auth') # This creates a Blueprint named 'auth'.
 
@@ -38,7 +38,8 @@ def register():
             else:
                 return redirect(url_for("auth.login"))
             flash(error)
-        return render_template('auth/register.html')
+
+    return render_template('auth/register.html')
 
 
 # (3.4) - Create a Blueprint¶ -> Login¶
